@@ -1,0 +1,39 @@
+
+
+ex1)let john = { name: "John", surname: "Smith", id: 1 };
+let mary = { name: "Mary", surname: "Key", id: 2 };
+
+
+let users = [ john, mary];
+
+let newUsers = users.map(user => ({
+  fullName: `${user.name} ${user.surname}`,
+  id: user.id
+}))
+console.log(newUsers)
+
+
+
+ex2)function sum(a,b){
+
+    console.log(a+b)
+  }
+  function decorator(fn, ms){
+	let ignore = false;
+	return function (...args){
+		if(!ignore) {
+			ignore = true;
+			fn.call(this, ...args);
+            setTimeout(() => ignore = false, ms);	
+            let sumFromDecorator = decorator(sum,ms)
+        }
+        
+    }
+
+   
+}
+let sumFromDecorator = decorator(sum,1000)
+
+console.log(setTimeout( () => sumFromDecorator(10,20), 100 ))
+console.log(setTimeout( () => sumFromDecorator(10,30), 1000 )); 
+console.log(setTimeout( () => sumFromDecorator(10,40), 1500 ));
